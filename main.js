@@ -328,24 +328,24 @@ class Vec {
     this.y = y;
   }
 
-  add(v) {  // 加算
+  add(v) {  // 加算 Kasan qui signifie ajout
     return new Vec(this.x + v.x, this.y + v.y);
   }
 
-  mul(x, y) {  // 掛算
+  mul(x, y) {  // 掛算 Guàsuàn qui signifie "en attente de règlement"
     var y = y || x;
     return new Vec(this.x * x, this.y * y);
   }
 
-  dot(v) {  // 内積
+  dot(v) {  // 内積 Naiseki qui signifie produit intérieur
     return this.x * v.x + this.y * v.y;
   }
 
-  cross(v) {  // 外積
+  cross(v) {  // 外積 Wàijī qui signifie produit extérieur
     return this.x * v.y - v.x * this.y;
   }
 
-  move(dx, dy) {  // 自分を移動
+  move(dx, dy) {  // 自分を移動 Jibun o idō qui signifie Deplace-toi
     this.x += dx;
     this.y += dy;
   }
@@ -913,4 +913,9 @@ function touchMove(e) {
 
 function touchEnd() {
   player.updateTargetRadian(null);
+}
+
+module.exports = {
+  Vec:  Vec,
+  GameStatus : GameStatus
 }
