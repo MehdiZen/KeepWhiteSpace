@@ -1,0 +1,42 @@
+name : tester
+
+on: 
+  pull_request:
+    branches:
+      - 'main'
+
+jobs:
+      tests:
+        runs-on: ubuntu-latest
+    
+        strategy:
+          matrix:
+            node-version: [16.x,18.x,20.x]
+
+        steps:
+        - uses: actions/checkout@v2
+        - name: Cache node modules
+          id: cacheAction
+          uses: actions/cache@v2
+          env:
+            cache-name: cache-node-modules
+          with:
+            path: ~/.npm
+            key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashfiles('**/package-lock.json') }}
+            restore-keys: |
+              ${{runner.os}}--build-${{ env.cache-name }}--
+              ${{runner.os}}--build-
+              ${{runner.os}}
+
+        - name: Setup node
+          uses: actions/setup-node@v3
+          with:
+            node-version: 16.13.x
+            cache: npm
+            
+        - name: npm install
+          if: steps.cacheAction.outputs.cache-hit != 'true'  
+          run: npm ci
+
+        - name: tests
+          run: npm test  
