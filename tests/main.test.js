@@ -31,7 +31,6 @@ describe(
         test("test trop relou = 57", () => {
             expect(new Vec(1, 2).dot(new Vec(1, 2).add(new Vec(new Vec(1, 2).dot(new Vec(2, 1)), new Vec(1, 2).cross(new Vec(3, 4).mul(-2, 3)))))).toBe(57)
         })
-
         test("test add(3) = x:NaN, y:NaN", () => {
             expect(new Vec(1, 2).add(3)).toMatchObject({ x: NaN, y: NaN })
         })
