@@ -909,7 +909,7 @@ function touchMove(e) {
 function touchEnd() {
   player.updateTargetRadian(null);
 }
-
+ 
   module.exports = { // eslint-disable-line
     Vec: Vec,
     GameStatus: GameStatus
